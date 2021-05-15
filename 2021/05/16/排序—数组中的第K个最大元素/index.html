@@ -5,14 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Endymion || Hello World</title>
-    <meta name="author" content="John Doe">
+    <title>Endymion || </title>
+    <meta name="author" content="endymion">
     <meta name="description" content=" ">
     <meta name="keywords" content=" ">
-    <link rel="icon" href="/images/avatar.png">
+    <link rel="icon" href="//images/avatar.png">
     <link rel="stylesheet" href="/css/antd.min.css">
     
-    <link rel="stylesheet" href="/css/maiden-theme.css">
+    <link rel="stylesheet" href="/css/full-theme.css">
     
     <script src="/js/vue.js"></script>
     <script src="/js/antd.min.js"></script>
@@ -27,12 +27,10 @@
         <div
             style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
             <div id="loadcontent"
-                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                style="width:500px;height:500px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#374247; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
                 <div>
-                    <h2>LOADING...</h2>
-                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
                     <div>
-                        <img src="/dancingkitty.gif" alt="loading">
+                        <img src="/inload.gif" alt="loading">
                     </div>
                 </div>
             </div>
@@ -169,14 +167,14 @@
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
     <div>
-        <h1>Hello World </h1>
+        <h1> </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <a-icon type="calendar" theme="filled" />
             </span>
-            2021/5/15
+            2021/5/16
         </span>
 
         
@@ -185,19 +183,97 @@
     </div>
 
     <div class="content" v-pre>
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
+        <h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><p>@[TOC]</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">数组中的第K个最大元素</a></p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
+<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><p>输入: [3,2,1,5,6,4] 和 k = 2<br>输出: 5</p>
+<h2 id="排序-1"><a href="#排序-1" class="headerlink" title="排序"></a>排序</h2><h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><pre><code class="cpp">class Solution &#123;
+public:
+    int findKthLargest(vector&lt;int&gt;&amp; nums, int k) &#123;
+        quickSort(nums, 0, nums.size() - 1);
+        return nums[nums.size() - k];     
+    &#125;
+    void quickSort(vector&lt;int&gt;&amp; nums, int l, int r)&#123;
+        if(l &lt; r)&#123;
+            int mid = partion(nums, l, r);
+            quickSort(nums, l, mid -1);
+            quickSort(nums, mid + 1, r);
+        &#125;
+    &#125;
+    int partion(vector&lt;int&gt;&amp; nums, int l , int r)&#123;
+        int randIndex = rand()%(r-l+1)+l;
+        swap(nums[l], nums[randIndex]);
+        int temp = nums[l];
+        while(l &lt; r)&#123;
+            while(l &lt; r &amp;&amp; nums[r] &gt; temp)r--;
+            nums[l] = nums[r];
+            while(l &lt; r &amp;&amp; nums[l] &lt;= temp)l++;
+            nums[r] = nums[l];
+        &#125;
+       nums[l] = temp;
+        return l;
+    &#125;
+&#125;;
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>使用数组下标从0开始，对于下标 i ：父节点（ i - 1）/ 2；<br>左子节点 2 i + 1，右子节点 2 i + 2。</p>
+<p>从倒数第二层即找到最后一个节点(n - 1)的父节点(n-2)/2开始依次往右往上堆化。</p>
+<pre><code class="cpp">class Solution &#123;
+public:
+    int findKthLargest(vector&lt;int&gt;&amp; nums, int k) &#123;
+        int n = nums.size();
+        for(int i = (n-2) / 2; i&gt;= 0; i--)
+            sort(nums, i, n);   //从最后一个节点父节点往左往上堆化
+        for(int i = n- 1; i &gt;= 1; i--)&#123;
+            swap(nums[0],nums[i]); //把最大值交换到末尾，继续进行堆化
+            sort(nums, 0 ,i);
+        &#125;
+        return nums[nums.size() - k];
+    &#125;
+    void sort (vector&lt;int&gt;&amp; nums, int i , int n)&#123;
+        int r = 2 * i + 2;
+        int l = r -1;
+        int max = i;
+        if(l &lt; n &amp;&amp; nums[l] &gt; nums[max]) max = l;
+        if(r &lt; n &amp;&amp; nums[r] &gt; nums[max]) max = r;
+        if(max != i)&#123; //nums[i] 比左右子节点小是需要交换
+            swap(nums[max],nums[i]);
+            sort(nums, max, n); //递归进行
+        &#125;
+    &#125;
+&#125;;
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
+<p>由于只需要得到最大的K，并不需要对整个数组都进行排序，在快排的基础上改进</p>
+<h2 id="快速选择"><a href="#快速选择" class="headerlink" title="快速选择"></a>快速选择</h2><p>每次选择一个元素划分左右区间，只需要关心比他大的元素，k修改为nums.size() - k，即完全排序后第k大所在的位置，当当前位置j小于k时l = j + 1，大于k时 r = j - 1.</p>
+<pre><code class="cpp">class Solution &#123;
+public:
+    int findKthLargest(vector&lt;int&gt;&amp; nums, int k) &#123;
+         k = nums.size() - k;
+        int l = 0, r = nums.size() - 1;
+        while(l &lt; r)&#123;
+            int j = sort(nums,l,r);
+            if(j == k)
+                break;
+            else if(j &lt; k)
+                l = j + 1;
+            else
+                r = j - 1;
+        &#125;
+        return nums[k];
+       
+    &#125;
+    int sort(vector&lt;int&gt;&amp; nums, int l, int r)&#123;
+        int randIndex = rand()%(r-l+1)+l;
+        swap(nums[l], nums[randIndex]);
+        int k = r;
+        for(int i = r; i &gt; l; i--)&#123;
+            if(nums[i] &gt;= nums[l])
+                swap(nums[i],nums[k--]);//从r往前到k + 1前存放比nums[l]大的
+        &#125;
+        swap(nums[l],nums[k]);
+        return k;
+    &#125;
+&#125;;
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
     </div>
 
@@ -216,7 +292,7 @@
             © 2018 - 2021 Endymion
             <span class="footer-icon">
                 <a-icon type="flag" theme="filled" /></span>
-            @John Doe
+            @endymion
         </div>
         <div></div>
         <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
