@@ -183,9 +183,9 @@
     </div>
 
     <div class="content" v-pre>
-        <h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>前提==序列已经排好序了==，每次计算中间值，根据中间结果确定下次选择左右区间的哪个区间，逐渐逼近最终结果，每次缩小一半的范围，因此二分的时间复杂度为==O( logn )==。</p>
+        <h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>前提序列已经排好序了，每次计算中间值，根据中间结果确定下次选择左右区间的哪个区间，逐渐逼近最终结果，每次缩小一半的范围，因此二分的时间复杂度为O( logn )。</p>
 <h2 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h2><p>较常用的为左闭右闭和左闭右开两种，当存在重复元素时涉及到查找第一个和最后一个符合条件的，下面分别进行介绍。</p>
-<h2 id="左闭右闭"><a href="#左闭右闭" class="headerlink" title="左闭右闭"></a>左闭右闭</h2><p>==int left = 0, right = nums.size() - 1;==</p>
+<h2 id="左闭右闭"><a href="#左闭右闭" class="headerlink" title="左闭右闭"></a>左闭右闭</h2><p>int left = 0, right = nums.size() - 1;</p>
 <p>查找第一个:<br>等于target时向左收缩，即等于target时需要right = mid - 1;</p>
 <pre><code class="cpp">int binSearch(vector&lt;int&gt; nums, int target)
 &#123;
@@ -216,12 +216,12 @@
     return left--;
 &#125;
 </code></pre>
-<h2 id="左闭右开"><a href="#左闭右开" class="headerlink" title="左闭右开"></a>左闭右开</h2><p>==int left = 0, right = nums.size() - 1;==</p>
+<h2 id="左闭右开"><a href="#左闭右开" class="headerlink" title="左闭右开"></a>左闭右开</h2><p>int left = 0, right = nums.size() - 1;</p>
 <p>查找第一个：<br>等于target时向左收缩</p>
 <pre><code class="cpp">int binSearch(vector&lt;int&gt; nums, int target)
 &#123;
     int left = 0, right = nums.size();
-    while (left &lt;= right)
+    while (left &lt; right)
     &#123;
         int mid = left + ((right - left) &gt;&gt; 1);//移位更快
         if(target &lt;= nums[mid])
@@ -232,15 +232,15 @@
     return left;
 &#125;
 </code></pre>
-<p>查找最后一个：<br>等于target时向右收缩，跳出循环时left = mid + 1,mid 为最后一个元素，所以==left–==；或者返回right。</p>
+<p>查找最后一个：<br>等于target时向右收缩，跳出循环时left = mid + 1,mid 为最后一个元素，所以left–；或者返回right。</p>
 <pre><code class="cpp">int binSearch(vector&lt;int&gt; nums, int target)
 &#123;
-    int left = 0, right = nums.size() - 1;
-    while (left &lt;= right)
+    int left = 0, right = nums.size() ;
+    while (left &lt; right)
     &#123;
         int mid = left + ((right - left) &gt;&gt; 1);//移位更快
         if(target &lt; nums[mid])
-            right = mid - 1;
+            right = mid ;
         else
             left = mid + 1;
     &#125; 
