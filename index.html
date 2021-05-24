@@ -251,7 +251,7 @@
     return left--;
 &#125;
 </code></pre>
-<h2 id="左闭右开"><a href="#左闭右开" class="headerlink" title="左闭右开"></a>左闭右开</h2><p>int left = 0, right = nums.size() - 1;</p>
+<h2 id="左闭右开"><a href="#左闭右开" class="headerlink" title="左闭右开"></a>左闭右开</h2><p>int left = 0, right = nums.size();</p>
 <p>查找第一个：<br>等于target时向左收缩</p>
 <pre><code class="cpp">int binSearch(vector&lt;int&gt; nums, int target)
 &#123;
@@ -259,7 +259,7 @@
     while (left &lt; right)
     &#123;
         int mid = left + ((right - left) &gt;&gt; 1);//移位更快
-        if(target &lt;= nums[mid])
+        if(target &lt; nums[mid])
             right = mid;
         else
             left = mid + 1;
