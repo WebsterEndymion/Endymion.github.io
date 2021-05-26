@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Endymion&#39;s Blog || </title>
+    <title>Endymion&#39;s Blog || 二叉树遍历—非递归</title>
     <meta name="author" content="endymion">
     <meta name="description" content="Life is struggle ">
     <meta name="keywords" content="essay learning development ">
@@ -163,138 +163,153 @@
                 </div>
 
                 <div id="main">
-                    
-<div id="archives">
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/5/26" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/5/26</div>
-                <a href="/2021/05/26/二叉树遍历—非递归/">
-                    <h3>二叉树遍历—非递归</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/算法">
-                            <span class="icon"><a-icon type="book" theme="filled" /></span>
-                            算法
-                        </a>
-                    </span>
-                    
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>二叉树遍历—非递归 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2021/5/26
+        </span>
 
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <a-icon type="tags" />
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/二叉树" style=color:#ff7d73>
-                                二叉树
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/5/24" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/5/24</div>
-                <a href="/2021/05/24/二分查找—存在重复寻找第一个和最后一个/">
-                    <h3>二分查找—存在重复寻找第一个和最后一个</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/算法">
-                            <span class="icon"><a-icon type="book" theme="filled" /></span>
-                            算法
-                        </a>
-                    </span>
-                    
+        
+        <span class="category">
+            <a href="/categories/算法">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" />
+                </span>
+                算法
+            </a>
+        </span>
+        
 
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <a-icon type="tags" />
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/二分查找" style=color:#00a596>
-                                二分查找
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/5/16" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/5/16</div>
-                <a href="/2021/05/16/排序—数组中的第K个最大元素/">
-                    <h3>排序—数组中的第K个最大元素</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/算法">
-                            <span class="icon"><a-icon type="book" theme="filled" /></span>
-                            算法
-                        </a>
-                    </span>
-                    
+        
 
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <a-icon type="tags" />
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/排序" style=color:#00a596>
-                                排序
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/5/15" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/5/15</div>
-                <a href="/2021/05/15/hello/">
-                    <h3>hello</h3>
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/二叉树" style=color:#ff7d73>
+                    二叉树
                 </a>
-                <div class="info">
-                    
+            </span>
+            
+        </span>
+        
+    </div>
 
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
+    <div class="content" v-pre>
+        <h1 id="二叉树遍历—非递归"><a href="#二叉树遍历—非递归" class="headerlink" title="二叉树遍历—非递归"></a>二叉树遍历—非递归</h1><h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-preorder-traversal/">前序遍历题目</a></p>
+<pre><code class="cpp">    vector&lt;int&gt; preorderTraversal(TreeNode* root) &#123;
+        vector&lt;int&gt; res;
+        if(!root) return res;
+        stack&lt;TreeNode*&gt; stk;
+        stk.push(root);
+        while(!stk.empty())&#123;
+            TreeNode* temp = stk.top();
+            stk.pop();
+            res.push_back(temp-&gt;val);
+            if(temp-&gt;right)&#123;
+                stk.push(temp-&gt;right); //栈先进后出，右孩子先入栈
+            &#125;
+            if(temp-&gt;left)&#123;
+                stk.push(temp-&gt;left);
+            &#125;
+        &#125;
+        return res;
+    &#125;
+</code></pre>
+<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/">中序遍历题目</a></p>
+<pre><code class="cpp">    vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123;
+        vector&lt;int&gt; res;
+        if(!root)
+            return res;
+        stack&lt;TreeNode*&gt; stk;
+        TreeNode* cur = root;
+        while(cur || !stk.empty())&#123; // 初始时stk为空
+            if(cur)&#123;                // 存在left则left入栈，也可用while；
+                stk.push(cur);
+                cur = cur-&gt;left;
+            &#125;
+            if(cur == nullptr)&#123;
+                cur = stk.top();
+                stk.pop();
+                res.push_back(cur-&gt;val);
+                cur = cur-&gt;right;
+            &#125;
+        &#125;
+        return res;
+    &#125;
+</code></pre>
+<h2 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-postorder-traversal/">后序遍历题目</a></p>
+<pre><code class="cpp">    vector&lt;int&gt; postorderTraversal(TreeNode* root) &#123;
+        vector&lt;int&gt; res;
+        if(!root)
+           return res;
+        TreeNode* cur = root;
+        stack&lt;TreeNode*&gt; stk1;
+        stack&lt;TreeNode*&gt; stk2; //存放后序遍历的逆序
+        stk1.push(root);
+        while(!stk1.empty())&#123;
+            cur = stk1.top();
+            stk1.pop();
+            stk2.push(cur);
+            if(cur-&gt;left)&#123; // 先left后right与先序相反
+                stk1.push(cur-&gt;left);
+            &#125;
+            if(cur-&gt;right)&#123;
+                stk1.push(cur-&gt;right);
+            &#125;
+        &#125;
+        while(!stk2.empty())&#123;
+            res.push_back(stk2.top()-&gt;val);
+            stk2.pop();
+        &#125;
+        return res;
+    &#125;
+</code></pre>
+<p>直接使用reverse</p>
+<pre><code class="cpp">    vector&lt;int&gt; postorderTraversal(TreeNode* root) &#123;
+        vector&lt;int&gt; res;
+        if(!root)
+           return res;
+        TreeNode* cur = root;
+        stack&lt;TreeNode*&gt; stk;
+        stk.push(root);
+        while(!stk.empty())&#123;
+            cur = stk.top();
+            stk.pop();
+            res.push_back(cur-&gt;val); //存放的后序遍历的逆序
+            if(cur-&gt;left)&#123;
+                stk.push(cur-&gt;left);
+            &#125;
+            if(cur-&gt;right)&#123;
+                stk.push(cur-&gt;right);
+            &#125;
+        &#125;
+        reverse(res.begin(), res.end());
+        return res;
+    &#125;
+</code></pre>
+
+    </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
     
 </div>
-
                      
 <footer id="footer">
     <div class="footer-wrap">
@@ -357,6 +372,21 @@
             }
         }
     })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: 'hexo-theme-particle',      // The repository of store comments,
+        owner: 'korilin',
+        admin: ['korilin'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
 </script>
 
 </body>
