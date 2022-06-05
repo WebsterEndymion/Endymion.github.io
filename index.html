@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Endymion&#39;s Blog || </title>
+    <title>Endymion&#39;s Blog || Life is struggle</title>
     <meta name="author" content="endymion">
     <meta name="description" content="Life is struggle ">
     <meta name="keywords" content="essay learning development ">
@@ -177,7 +177,7 @@
         <span class="info">
             <div class="wrap">
                 <h1>Endymion's Blog</h1>
-                <h3></h3>
+                <h3>Life is struggle</h3>
                 <h5>Life is struggle</h5>
             </div>
         </span>
@@ -192,6 +192,90 @@
 
         <div id="posts">
             
+
+<div class="post">
+
+    <a href="/2022/06/05/树状数组/">
+        <h2>
+            树状数组原理
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+        <span class="category">
+            <a href="/categories/算法">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" /></span>
+                算法
+            </a>
+        </span>
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/6/5
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h1><p>普通数组单点修改复杂度为O(1)，区间求和复杂度为O(n)。使用前缀和单点修改复杂度为O(n)，区间求和为O(1)。树状数组采用折中的方法。</p>
+<p>对 [a,b] 进行区间查询只需查询 [1,b] 和 [1,a] 然后相减，可以把区间查询问题转化为求前n项和的问题。<br>树状数组就是这样一种结构，它巧妙地利用了二进制）。例如11，转化为二进制数就是 [1011] ，要求前11项和，可以分别查询 [0000,1000] 、[1000,1010]以及[1010,1011]的和，再相加</p>
+<p><strong>优点</strong>：修改查询复杂度都是O(logN)，比线段树系数少，比传统数组快且易于修改。<br><strong>缺点</strong>：不能解决复杂区间问题。</p>
+<h2 id="树状数组结构图"><a href="#树状数组结构图" class="headerlink" title="树状数组结构图"></a>树状数组结构图</h2><p><img src="bit%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="结构图"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>[Ci] 维护区间 (A*(i-lowbit(i))*,Ai]<br>lowbit(x) = x &amp; -x;</p>
+<h3 id="单点修改"><a href="#单点修改" class="headerlink" title="单点修改"></a>单点修改</h3><pre><code class="cpp">int tree[MAXN];
+inline void update(int i, int x)
+&#123;
+    for (int pos = i; pos &lt; MAXN; pos += lowbit(pos))
+        tree[pos] += x;
+&#125;
+</code></pre>
+<h3 id="求前n项和"><a href="#求前n项和" class="headerlink" title="求前n项和"></a>求前n项和</h3><pre><code class="cpp">inline int query(int n)
+&#123;
+    int ans = 0;
+    for (int pos = n; pos; pos -= lowbit(pos))
+        ans += tree[pos];
+    return ans;
+&#125;
+</code></pre>
+<h3 id="区间查询"><a href="#区间查询" class="headerlink" title="区间查询"></a>区间查询</h3><pre><code class="cpp">inline int query(int a, int b)
+&#123;
+    return query(b) - query(a - 1);
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/树状数组" style=color:#03a9f4>
+                树状数组
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/06/05/树状数组/ " class="go-post">
+        阅读全文
+    </a>
+</div>
 
 <div class="post">
 
@@ -332,7 +416,7 @@
         
         <span class="tag">
             
-            <a href="/tags/二叉树" style=color:#ff7d73>
+            <a href="/tags/二叉树" style=color:#ffa2c4>
                 二叉树
             </a>
         </span>
@@ -455,7 +539,7 @@
         
         <span class="tag">
             
-            <a href="/tags/二分查找" style=color:#ffa2c4>
+            <a href="/tags/二分查找" style=color:#00bcd4>
                 二分查找
             </a>
         </span>
@@ -604,7 +688,7 @@ public:
         
         <span class="tag">
             
-            <a href="/tags/排序" style=color:#ff7d73>
+            <a href="/tags/排序" style=color:#ffa2c4>
                 排序
             </a>
         </span>
@@ -748,7 +832,7 @@ public:
 <footer id="footer">
     <div class="footer-wrap">
         <div>
-            © 2018 - 2021 Endymion&#39;s Blog
+            © 2018 - 2022 Endymion&#39;s Blog
             <span class="footer-icon">
                 <a-icon type="flag" theme="filled" /></span>
             @endymion
